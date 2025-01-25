@@ -2,10 +2,10 @@
 
  - ADRSIR-tool-manual20180214.pdf
  - ARSIR_I2C_Command.pdf
- - I2C0x52-IR-IR20180413-4.zip
- - IRCodeData.zip
+ - I2C0x52-IR
+ - IRCodeData
 
-## I2C0x52-IR-IR20180413-4.zip 
+## I2C0x52-IR
 
 サンプルとして3種類のPythonスクリプトと、リモコンコード登録用のデータが同梱されています。
 
@@ -17,6 +17,6 @@
 
 I2C経由でRaspberryPiから指令を送る際のコマンド表です。
 
-## IRCodeData.zip
+## IRCodeData
 
 赤外線コントローラ製品各種のリモコンコード表です。
