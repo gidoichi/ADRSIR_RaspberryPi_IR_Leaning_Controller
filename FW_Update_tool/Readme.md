@@ -19,14 +19,14 @@
 ## 1. ADRSIR本体の準備
 ADRSIR本体のみを用意します 。
 
-![](./img/%20%20%20ADRSIR-FWupdate-manual2022-05-24-10-33-13.png)
+![](./img/ADRSIR-FWupdate-manual2022-05-24-10-33-13.png)
 
 ## 2. ファームウェアアップデートツールの起動
  
  [__ファームウェアアップデートツール_ダウンロードリンク__](https://github.com/bit-trade-one/ADRSIR_RaspberryPi_IR_Leaning_Controller/raw/master/FW_Update_tool/ADRSIR_UpdateTool_v110.exe)  
  
 PC側で __ファームウェア アップデート ツール__ をダウンロードし、起動します
-![](./img/%20%20%20ADRSIR-FWupdate-manual2022-05-24-10-37-23.png)
+![](./img/ADRSIR-FWupdate-manual2022-05-24-10-37-23.png)
 
 ## 3. PCとの接続
  - 電源切換え用のジャンパ（5VSEL)を「USB」側に切換えます。
