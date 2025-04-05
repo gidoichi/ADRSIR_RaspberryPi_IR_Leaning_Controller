@@ -8,8 +8,8 @@
 - Sample                [サンプルプログラム]
 - Schematics            [回路図]
 
-## ラズベリー・パイを高度な赤外線学習リモコンに！ 
-![](https://bit-trade-one.co.jp/wp/wp-content/uploads/2017/12/971809643c77bf0f16eb5f0663ed0802.png)  
+## ラズベリー・パイを高度な赤外線学習リモコンに！
+![](./img/971809643c77bf0f16eb5f0663ed0802.png)  
 
 Raspberry Piを高度な赤外線学習リモコンとして動作させることが可能な拡張基板です。  
 基板上に 10 個のスイッチを搭載し、それぞれスイッチ毎に外部赤外線リモコンの動作を基板本体内に記録可能です。  
@@ -22,13 +22,13 @@ Raspberry Piを高度な赤外線学習リモコンとして動作させるこ�
 
 ## [製品HP](https://bit-trade-one.co.jp/product/module/adrsir/)
 
-### [マニュアル](https://github.com/bit-trade-one/ADRSIR_RaspberryPi_IR_Leaning_Controller/tree/master/Manual)
+### [マニュアル](Manual)
 
-### [ファームウェアアップデート手順](https://github.com/bit-trade-one/ADRSIR_RaspberryPi_IR_Leaning_Controller/tree/master/FW_Update_tool)
+### [ファームウェアアップデート手順](FW_Update_tool)
 
-### [各種応用例/サンプル](https://github.com/bit-trade-one/ADRSIR_RaspberryPi_IR_Leaning_Controller/tree/master/Sample)
+### [各種応用例/サンプル](Sample)
 
-### [回路図](https://github.com/bit-trade-one/ADRSIR_RaspberryPi_IR_Leaning_Controller/blob/master/Schematics/ADRSIR_v131_schematics.pdf)
+### [回路図](Schematics/ADRSIR_v131_schematics.pdf)
 
 ## 製品仕様
 
