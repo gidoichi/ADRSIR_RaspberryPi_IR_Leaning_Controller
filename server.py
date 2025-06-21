@@ -3,10 +3,13 @@
 import argparse
 import importlib
 import sys
+from os import path
 from typing import Dict, Optional
 
 import flask
 import flask_restx
+
+filedir = path.dirname(path.abspath(__file__))
 
 app = flask.Flask(__name__)
 api = flask_restx.Api(app)
@@ -17,38 +20,56 @@ def cli():
 
     return parser.parse_args()
 
-def run(manifacturer: str, device: str, function: str, parameters: Dict[str, str] = {}, csvfile: Optional[str] = None):
+def run(command: str,
+        manifacturer: Optional[str] = None,
+        device: Optional[str] = None,
+        function: Optional[str] = None,
+        parameters: Dict[str, str] = {},
+        csvfile: Optional[str] = None):
     argv_org: list[str] = sys.argv
 
     module: str = "Sample.I2C0x52-IR.IR-remocon10-csvbase"
-    sys.argv = [
-        module,
-        "--manifacturer", manifacturer,
-        "--device", device,
-        "--function", function,
-    ]
+    sys.path.append(filedir)
+    sys.argv = [module, command]
+    if manifacturer is not None:
+        sys.argv.extend(["--manifacturer", manifacturer])
+    if device is not None:
+        sys.argv.extend(["--device", device])
+    if function is not None:
+        sys.argv.extend(["--function", function])
     if len(parameters) > 0:
-        params: str = ",".join([f"{k}={v}" for k, v in parameters])
+        params: str = ",".join([f"{k}={v}" for k, v in parameters.items()])
         sys.argv.extend(["--set", params])
     if csvfile is not None:
         sys.argv.extend(["--data", csvfile])
 
-    importlib.import_module(module)
+    csvbase = getattr(importlib.import_module(module), "main")
+    res = csvbase()
 
     sys.argv = argv_org
 
-@api.route("/manifacturers/<manifacturer>/devices/<device>/functions/<function>")
-class Manifacturer(flask_restx.Resource):
-    # TODO: remove
-    def get(self, manifacturer, device, function):
-        return {
-            "Hello": "World"
-        }
+    return res
 
+@api.route("/manifacturers")
+class Manifacturers(flask_restx.Resource):
+    def get(self):
+        return run("list", csvfile=csvfile)["manifacturers"]
+
+@api.route("/manifacturers/<manifacturer>/devices")
+class Devices(flask_restx.Resource):
+    def get(self, manifacturer: str):
+        return run("list", manifacturer, csvfile=csvfile)["devices"]
+
+@api.route("/manifacturers/<manifacturer>/devices/<device>/functions")
+class Functions(flask_restx.Resource):
+    def get(self, manifacturer: str, device: str):
+        return run("list", manifacturer, device, csvfile=csvfile)["functions"]
+
+@api.route("/manifacturers/<manifacturer>/devices/<device>/functions/<function>")
+class Function(flask_restx.Resource):
     def post(self, manifacturer: str, device: str, function: str):
         parameters = flask.request.get_json()
-        run(manifacturer=manifacturer, device=device, function=function, parameters=parameters, csvfile=csvfile)
-        # controller.Run(manifacturer=manifacturer, device=device, function=function, parameters={"templerature": 16, "power", "medium"})
+        run("send", manifacturer, device, function, parameters=parameters, csvfile=csvfile)
 
 csvfile: Optional[str] = None
 
