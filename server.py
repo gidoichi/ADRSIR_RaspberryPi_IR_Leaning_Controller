@@ -30,7 +30,10 @@ def run(command: str,
 
     module: str = "Sample.I2C0x52-IR.IR-remocon10-csvbase"
     sys.path.append(filedir)
-    sys.argv = [module, command]
+    sys.argv = [module]
+    if csvfile is not None:
+        sys.argv.extend(["--data", csvfile])
+    sys.argv.append(command)
     if manifacturer is not None:
         sys.argv.extend(["--manifacturer", manifacturer])
     if device is not None:
@@ -40,8 +43,6 @@ def run(command: str,
     if len(parameters) > 0:
         params: str = ",".join([f"{k}={v}" for k, v in parameters.items()])
         sys.argv.extend(["--set", params])
-    if csvfile is not None:
-        sys.argv.extend(["--data", csvfile])
 
     csvbase = getattr(importlib.import_module(module), "main")
     res = csvbase()
