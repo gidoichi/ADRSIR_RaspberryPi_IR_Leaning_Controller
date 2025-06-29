@@ -8,6 +8,7 @@ import subprocess
 from typing import Any, Dict, Optional
 
 import flask
+import waitress
 from flask import Flask
 from flask_restx import Api, Resource
 
@@ -124,6 +125,8 @@ csvfile: Optional[str] = args.csvfile
 verbosity: int = args.verbose
 
 loglevels: list[int] = [logging.WARNING, logging.INFO, logging.DEBUG]
-app.logger.setLevel(loglevels[min(verbosity, len(loglevels)-1)])
+loglevel: int = loglevels[min(verbosity, len(loglevels)-1)]
+app.logger.setLevel(loglevel)
+logging.getLogger('waitress').setLevel(loglevel)
 
-app.run(host="0.0.0.0")
+waitress.serve(app)
