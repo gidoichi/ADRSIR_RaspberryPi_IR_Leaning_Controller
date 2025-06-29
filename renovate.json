@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "branchConcurrentLimit": 0,
+  "labels": ["dependencies"],
+  "schedule": "* * 1-7 * 6",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchCurrentVersion": "!/^0/",
+      "matchPackageNames": ["*"],
+      "commitMessagePrefix": "[update:patch]",
+      "commitMessageExtra": null,
+      "recreateWhen": "always"
+    }
+  ]
+}

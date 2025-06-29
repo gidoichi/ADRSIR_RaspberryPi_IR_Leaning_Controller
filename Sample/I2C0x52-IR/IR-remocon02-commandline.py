@@ -37,7 +37,7 @@ from __future__ import print_function
 import os
 import sys
 
-import smbus
+import smbus2 as smbus
 
 # for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)
