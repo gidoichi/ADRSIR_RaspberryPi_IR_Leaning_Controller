@@ -8,8 +8,9 @@ import subprocess
 from typing import Any, Dict, Optional
 
 import flask
+import flask_restx
 import waitress
-from flask import Flask
+from flask import Flask, Response
 from flask_restx import Api, Resource
 
 filedir = os.path.dirname(os.path.abspath(__file__))
@@ -54,6 +55,7 @@ def run(subcommand: str,
 
 @api.route("/manifacturers")
 class Manifacturers(Resource):
+    @api.doc(description="List all manifacturers")
     def get(self):
         result: bytes = b""
         try:
@@ -73,6 +75,7 @@ class Manifacturers(Resource):
 
 @api.route("/manifacturers/<manifacturer>/devices")
 class Devices(Resource):
+    @api.doc(description="List devices for a specific manifacturer")
     def get(self, manifacturer: str):
         result: bytes = b""
         try:
@@ -92,6 +95,7 @@ class Devices(Resource):
 
 @api.route("/manifacturers/<manifacturer>/devices/<device>/functions")
 class Functions(Resource):
+    @api.doc(description="List functions for a specific device")
     def get(self, manifacturer: str, device: str):
         result: bytes = b""
         try:
@@ -111,6 +115,7 @@ class Functions(Resource):
 
 @api.route("/manifacturers/<manifacturer>/devices/<device>/functions/<function>")
 class Function(Resource):
+    @api.doc(description="Send a command to a specific function of a device", body=api.model("FunctionParameters", {}))
     def post(self, manifacturer: str, device: str, function: str):
         parameters = flask.request.get_json()
         try:
@@ -119,6 +124,16 @@ class Function(Resource):
             return flask.abort(500, f"error: {str(e)}")
 
         return {"status": "success", "message": "Command sent successfully"}, 200
+
+@api.route("/manifacturers/<manifacturer>/devices/<device>/functions/<function>/code")
+class Code(Resource):
+    @api.doc(description="Get the code for a specific function of a device")
+    def get(self, manifacturer: str, device: str, function: str):
+        try:
+            code = run("get", manifacturer, device, function, csvfile=csvfile)
+            return Response(code.decode(), mimetype="text/plain")
+        except Exception as e:
+            flask.abort(500, f"error: {str(e)}")
 
 args = cli()
 csvfile: Optional[str] = args.csvfile
