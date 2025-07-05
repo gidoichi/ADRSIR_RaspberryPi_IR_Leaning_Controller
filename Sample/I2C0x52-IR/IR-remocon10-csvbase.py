@@ -23,6 +23,7 @@ class Row:
         self.code = code
 
 class CliSubcommand(StrEnum):
+    GET = "get"
     LIST = "list"
     SEND = "send"
 
@@ -42,6 +43,11 @@ def cli():
 
     subpersers = parser.add_subparsers(dest="subcommand")
     subpersers.required = True
+
+    parser_get = subpersers.add_parser(CliSubcommand.GET)
+    parser_get.add_argument("--manifacturer", required=True)
+    parser_get.add_argument("--device", required=True)
+    parser_get.add_argument("--function", required=True)
 
     parser_list = subpersers.add_parser(CliSubcommand.LIST)
     parser_list.add_argument("--manifacturer")
@@ -112,6 +118,15 @@ logging.basicConfig(level=loglevels[min(verbosity, len(loglevels)-1)])
 logger = logging.getLogger(os.path.basename(__file__))
 
 match parsed_args.subcommand:
+    case CliSubcommand.GET:
+        searched = search(csvfile, logger, parsed_args.manifacturer, parsed_args.device, parsed_args.function)
+        if len(searched) == 0:
+            raise Exception("No matching data found in the CSV file")
+
+        codes: list[str] = [row.code for row in searched]
+        code: str = "".join(codes)
+        print(code)
+
     case CliSubcommand.LIST:
         manifacturer: Optional[str] = parsed_args.manifacturer
         device: Optional[str] = parsed_args.device
