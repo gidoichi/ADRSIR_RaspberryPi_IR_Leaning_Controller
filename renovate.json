@@ -6,12 +6,29 @@
   "schedule": "* * 1-7 * 6",
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchCurrentVersion": "!/^0/",
+      "matchFileNames": [
+        ".github/**"
+      ],
+      "commitMessageExtra": null,
+      "recreateWhen": "always",
+      "automerge": true,
+      "addLabels": [
+        "automerge"
+      ]
+    },
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "matchCurrentVersion": "!/^0/",
       "matchPackageNames": ["*"],
       "commitMessagePrefix": "[update:patch]",
       "commitMessageExtra": null,
-      "recreateWhen": "always"
+      "recreateWhen": "always",
+      "automerge": true,
+      "addLabels": [
+        "automerge"
+      ]
     }
   ]
 }
