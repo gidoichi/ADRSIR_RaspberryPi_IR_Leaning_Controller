@@ -1,4 +1,4 @@
-smbus2==0.5.0
+smbus2==0.6.0
 
 # IR-remocon10-csvbase.py
 jinja2==3.1.6
