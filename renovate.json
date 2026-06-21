@@ -3,7 +3,7 @@
   "extends": ["config:best-practices"],
   "branchConcurrentLimit": 0,
   "labels": ["dependencies"],
-  "schedule": "* * 1-7 * 6",
+  "schedule": "* 0 1-7 * 6",
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
@@ -11,6 +11,7 @@
       "matchFileNames": [
         ".github/**"
       ],
+      "commitMessagePrefix": "ci(deps):",
       "commitMessageExtra": null,
       "recreateWhen": "always",
       "automerge": true,
@@ -22,7 +23,7 @@
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "matchCurrentVersion": "!/^0/",
       "matchPackageNames": ["*"],
-      "commitMessagePrefix": "[update:patch]",
+      "commitMessagePrefix": "build(deps):",
       "commitMessageExtra": null,
       "recreateWhen": "always",
       "automerge": true,
