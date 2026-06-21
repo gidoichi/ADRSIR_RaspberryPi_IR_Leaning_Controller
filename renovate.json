@@ -1,35 +1,51 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices"],
+  "extends": [
+    "config:best-practices"
+  ],
   "branchConcurrentLimit": 0,
-  "labels": ["dependencies"],
+  "labels": [
+    "dependencies"
+  ],
   "schedule": "* 0 1-7 * 6",
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "addLabels": [
+        "automerge"
+      ],
+      "automerge": true,
+      "commitMessageExtra": null,
+      "commitMessagePrefix": "ci(deps):",
       "matchCurrentVersion": "!/^0/",
       "matchFileNames": [
         ".github/**"
       ],
-      "commitMessagePrefix": "ci(deps):",
-      "commitMessageExtra": null,
-      "recreateWhen": "always",
-      "automerge": true,
-      "addLabels": [
-        "automerge"
-      ]
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "recreateWhen": "always"
     },
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "matchCurrentVersion": "!/^0/",
-      "matchPackageNames": ["*"],
-      "commitMessagePrefix": "build(deps):",
-      "commitMessageExtra": null,
-      "recreateWhen": "always",
-      "automerge": true,
       "addLabels": [
         "automerge"
-      ]
+      ],
+      "automerge": true,
+      "commitMessageExtra": null,
+      "commitMessagePrefix": "build(deps):",
+      "matchCurrentVersion": "!/^0/",
+      "matchPackageNames": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "recreateWhen": "always"
     }
   ]
 }
