@@ -33,7 +33,7 @@ jobs:
       pushed: ${{ steps.exists.outputs.exists == 'false' }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
-      - uses: thejeff77/action-push-tag@v1.0.0
+      - uses: thejeff77/action-push-tag@f110b453ffb8c4d18880b7338f75e6725b731d81 # v1.0.0
         with:
           tag: ${{ needs.check.outputs.new-tag }}
 
