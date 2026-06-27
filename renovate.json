@@ -10,31 +10,6 @@
   "schedule": "* 0 1-7 * 6",
   "packageRules": [
     {
-      "commitMessagePrefix": "ci(deps):",
-      "matchFileNames": [
-        ".github/**"
-      ],
-      "recreateWhen": "always"
-    },
-    {
-      "addLabels": [
-        "automerge"
-      ],
-      "automerge": true,
-      "commitMessagePrefix": "ci(deps):",
-      "matchCurrentVersion": "!/^0/",
-      "matchFileNames": [
-        ".github/**"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
-      "recreateWhen": "always"
-    },
-    {
       "addLabels": [
         "automerge"
       ],
@@ -47,9 +22,27 @@
       "recreateWhen": "always"
     },
     {
-      "commitMessagePrefix": "build(deps):",
-      "matchPackageNames": [
-        "*"
+      "addLabels": [
+        "automerge"
+      ],
+      "automerge": true,
+      "commitMessagePrefix": "ci(deps):",
+      "matchCurrentVersion": "!/^0/",
+      "matchFileNames": [
+        ".github/**"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "recreateWhen": "always"
+    },
+    {
+      "commitMessagePrefix": "ci(deps):",
+      "matchFileNames": [
+        ".github/**"
       ],
       "recreateWhen": "always"
     },
@@ -68,6 +61,13 @@
         "patch",
         "pin",
         "digest"
+      ],
+      "recreateWhen": "always"
+    },
+    {
+      "commitMessagePrefix": "build(deps):",
+      "matchPackageNames": [
+        "*"
       ],
       "recreateWhen": "always"
     }
