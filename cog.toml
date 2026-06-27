@@ -1,8 +1,5 @@
 disable_changelog = true
 tag_prefix = "v"
-post_bump_hooks = [
-    "git push origin v{{version}}"
-]
 
 [commit_types.build]
 bump_patch = true

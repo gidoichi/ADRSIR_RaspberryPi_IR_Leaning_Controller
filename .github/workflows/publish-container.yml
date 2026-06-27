@@ -1,8 +1,16 @@
 name: Publish Container
 on:
-  push:
-    tags:
-      - 'v*'
+  pull_request:
+  workflow_call:
+    inputs:
+      tag:
+        required: false
+        type: string
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: false
+        type: string
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -17,4 +25,6 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ github.repository_owner }}/adrsir-raspberrypi-ir-leaning-controller:${{ github.ref_name }},${{ github.repository_owner }}/adrsir-raspberrypi-ir-leaning-controller:latest
+          tags: |
+            ${{ inputs.tag != '' && format('{0}/adrsir-raspberrypi-ir-leaning-controller:{1}', github.repository_owner, inputs.tag) || '' }}
+            ${{ github.repository_owner }}/adrsir-raspberrypi-ir-leaning-controller:latest
