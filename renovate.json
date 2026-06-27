@@ -1,34 +1,68 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices"],
+  "extends": [
+    "config:best-practices"
+  ],
   "branchConcurrentLimit": 0,
-  "labels": ["dependencies"],
-  "schedule": "* * 1-7 * 6",
+  "labels": [
+    "dependencies"
+  ],
+  "schedule": "* 0 1-7 * 6",
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "addLabels": [
+        "automerge"
+      ],
+      "automerge": true,
+      "commitMessageExtra": null,
+      "commitMessagePrefix": "ci(deps):",
+      "matchFileNames": [
+        ".github/workflows/publish-container.yml"
+      ],
+      "recreateWhen": "always"
+    },
+    {
+      "addLabels": [
+        "automerge"
+      ],
+      "automerge": true,
+      "commitMessagePrefix": "ci(deps):",
       "matchCurrentVersion": "!/^0/",
       "matchFileNames": [
         ".github/**"
       ],
-      "commitMessageExtra": null,
-      "recreateWhen": "always",
-      "automerge": true,
-      "addLabels": [
-        "automerge"
-      ]
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "recreateWhen": "always"
     },
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "matchCurrentVersion": "!/^0/",
-      "matchPackageNames": ["*"],
-      "commitMessagePrefix": "[update:patch]",
-      "commitMessageExtra": null,
-      "recreateWhen": "always",
-      "automerge": true,
+      "commitMessagePrefix": "ci(deps):",
+      "matchFileNames": [
+        ".github/**"
+      ],
+      "recreateWhen": "always"
+    },
+    {
       "addLabels": [
         "automerge"
-      ]
+      ],
+      "automerge": true,
+      "commitMessagePrefix": "build(deps):",
+      "matchCurrentVersion": "!/^0/",
+      "matchPackageNames": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "recreateWhen": "always"
     }
   ]
 }
