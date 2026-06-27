@@ -3,33 +3,23 @@
   "extends": [
     "config:best-practices"
   ],
+  "addLabels": [
+    "automerge"
+  ],
+  "automerge": true,
   "branchConcurrentLimit": 0,
+  "commitMessagePrefix": "build(deps):",
   "labels": [
     "dependencies"
   ],
+  "recreateWhen": "always",
   "schedule": "* 0 1-7 * 6",
   "packageRules": [
     {
-      "addLabels": [
-        "automerge"
-      ],
-      "automerge": true,
       "commitMessagePrefix": "ci(deps):",
       "matchFileNames": [
         ".github/**"
-      ],
-      "recreateWhen": "always"
-    },
-    {
-      "addLabels": [
-        "automerge"
-      ],
-      "automerge": true,
-      "commitMessagePrefix": "build(deps):",
-      "matchFileNames": [
-        "!.github/**"
-      ],
-      "recreateWhen": "always"
+      ]
     }
   ]
 }
