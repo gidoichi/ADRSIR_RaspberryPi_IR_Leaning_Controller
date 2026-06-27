@@ -63,6 +63,13 @@
         "digest"
       ],
       "recreateWhen": "always"
+    },
+    {
+      "commitMessagePrefix": "build(deps):",
+      "matchPackageNames": [
+        "*"
+      ],
+      "recreateWhen": "always"
     }
   ]
 }
